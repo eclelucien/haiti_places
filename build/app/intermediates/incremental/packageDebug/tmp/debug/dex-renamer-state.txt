@@ -1,4 +1,4 @@
-#Sat Dec 18 11:09:57 BRT 2021
-base.0=/home/eclesiaste/Documents/github/mjcode/Haiti_Places/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-path.0=classes.dex
+#Wed Jan 05 13:58:57 BRT 2022
+base.0=/home/eagle/eagle_project/others/Haiti_Places/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
+path.0=classes.dex

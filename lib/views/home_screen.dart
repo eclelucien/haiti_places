@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:haiti_places/persistentWidget/contestTabHeader.dart';
+import 'package:haiti_places/views/details_screen.dart';
+import 'package:haiti_places/widgets/appBar.dart';
 import 'package:haiti_places/widgets/drawer/custom_drawer.dart';
 import 'package:haiti_places/widgets/hotel_listviewtest.dart';
 import 'package:haiti_places/widgets/place_list_data.dart';
@@ -11,14 +14,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  List<HotelListData> hotelList = HotelListData.hotelList;
-
+  ///COMMONS VARIABLES
   final ScrollController _scrollController = ScrollController();
+  late final AnimationController animationController;
+  List<HotelListData> hotelList = HotelListData.hotelList;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
 
-  late final AnimationController animationController;
-
+  ///OVERRIDES FUNCTIONS
   @override
   void initState() {
     super.initState();
@@ -32,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  ///FUTURES
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
     return true;
@@ -57,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             },
             child: Column(
               children: <Widget>[
-                getAppBarUI(),
+                GeneralAppBar(),
                 Expanded(
                   child: NestedScrollView(
                     controller: _scrollController,
@@ -102,7 +106,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           curve: Curves.fastOutSlowIn)));
                           animationController.forward();
                           return HotelListView(
-                            callback: () {},
+                            callback: ([image, reviews, name, description]) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PlaceDetails(
+                                    image: image,
+                                    reviews: reviews,
+                                    name: name,
+                                    description: description,
+                                  ),
+                                ),
+                              );
+                            },
                             hotelData: hotelList[index],
                             animation: animation,
                             animationController: animationController,
@@ -118,110 +134,5 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ],
       ),
     );
-  }
-
-  ///Uma função que retorna um widget como o appBar
-  Widget getAppBarUI() {
-    return Container(
-      decoration: BoxDecoration(
-        // color: HotelAppTheme.buildLightTheme().backgroundColor,
-        color: Colors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              offset: const Offset(0, 2),
-              blurRadius: 8.0),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top, left: 8, right: 8),
-        child: Material(
-          child: Row(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.centerLeft,
-                width: AppBar().preferredSize.height + 40,
-                height: AppBar().preferredSize.height,
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-                  onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.accessibility,
-                    ),
-                  ),
-                ),
-              ),
-              const Expanded(
-                child: Center(
-                  child: Text(
-                    'Explorer',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: AppBar().preferredSize.height + 40,
-                height: AppBar().preferredSize.height,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    InkWell(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(32.0),
-                      ),
-                      onTap: () {},
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.favorite_border, color: Colors.red),
-                      ),
-                    ),
-                    InkWell(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(32.0),
-                      ),
-                      onTap: () {},
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.map_rounded, color: Colors.grey),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ContestTabHeader extends SliverPersistentHeaderDelegate {
-  ContestTabHeader(
-    this.searchUI,
-  );
-  final Widget searchUI;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return searchUI;
-  }
-
-  @override
-  double get maxExtent => 52.0;
-
-  @override
-  double get minExtent => 52.0;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }

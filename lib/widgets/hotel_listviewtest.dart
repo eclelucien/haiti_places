@@ -10,7 +10,8 @@ class HotelListView extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final VoidCallback callback;
+
+  final Function callback;
   final HotelListData hotelData;
   final AnimationController animationController;
   final Animation<double> animation;
@@ -29,7 +30,7 @@ class HotelListView extends StatelessWidget {
               padding: const EdgeInsets.only(
                   left: 24, right: 24, top: 8, bottom: 16),
               child: GestureDetector(
-                onTap: () => callback(),
+                onTap: () => callback(image: hotelData.imagePath, reviews: hotelData.reviews, neme: hotelData.titleTxt, description: "Juste pour tester, ici on aura une description du lieu",),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
@@ -97,7 +98,7 @@ class HotelListView extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  '${hotelData.dist.toStringAsFixed(1)} km to city',
+                                                  '${hotelData.dist.toStringAsFixed(1)} km de votre position',
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
@@ -108,9 +109,13 @@ class HotelListView extends StatelessWidget {
                                               ),
                                             ],
                                           ),
-                                          Padding(
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 4),
+                                                const EdgeInsets.only(top: 8, right: 8),
                                             child: Row(
                                               children: <Widget>[
                                                 Text(
@@ -123,62 +128,12 @@ class HotelListView extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 16, top: 8),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        Text(
-                                          '\$${hotelData.perNight}',
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 22,
-                                          ),
-                                        ),
-                                        Text(
-                                          '/La course',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color:
-                                                  Colors.grey.withOpacity(0.8)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(32.0),
-                              ),
-                              onTap: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        separation()
                       ],
                     ),
                   ),
@@ -188,6 +143,29 @@ class HotelListView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget separation() {
+    return Positioned(
+      top: 8,
+      right: 8,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(32.0),
+          ),
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.favorite_border,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

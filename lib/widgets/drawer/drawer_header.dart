@@ -40,7 +40,7 @@ class CustomDrawerHeader extends StatelessWidget {
                             style: TextStyle(color: Colors.blue[900]),
                           ),
                           Text(" d'Haiti",
-                              style: TextStyle(color: Colors.blue[900]))
+                              style: TextStyle(color: Colors.red))
                         ],
                       ),
                     ))
