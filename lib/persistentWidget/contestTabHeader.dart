@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ContestTabHeader extends SliverPersistentHeaderDelegate {
   ContestTabHeader(
     this.searchUI,

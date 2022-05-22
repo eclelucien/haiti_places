@@ -7,7 +7,6 @@ class GeneralAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        // color: HotelAppTheme.buildLightTheme().backgroundColor,
         color: Colors.white,
         boxShadow: <BoxShadow>[
           BoxShadow(

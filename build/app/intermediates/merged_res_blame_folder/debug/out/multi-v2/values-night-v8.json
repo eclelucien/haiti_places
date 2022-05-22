@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/eagle/eagle_project/others/Haiti_Places/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/home/eclesiaste/Documents/github/mjcode/Haiti_Places/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/eagle/eagle_project/others/Haiti_Places/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/eclesiaste/Documents/github/mjcode/Haiti_Places/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
